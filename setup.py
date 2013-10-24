@@ -25,6 +25,6 @@ setup(
     author_email="a.krille@b-c-s.de",
     url="http://github.com/bcs-de/mezzanine-pageimages",
     license=open('LICENSE', 'r').read(),
-    packages=['pageimages'],
+    packages=['pageimages', 'pageimages.templatetags', 'pageimages.migrations'],
     install_requires=['mezzanine>=1.4.0'],
 )
