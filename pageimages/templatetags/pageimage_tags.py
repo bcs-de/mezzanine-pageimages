@@ -34,6 +34,5 @@ def get_image_for_page(page, type):
 
 @register.simple_tag(takes_context=True)
 def pageimage(context, type):
-    print u"Should return an image-url for type '{}' on context '{}'".format(type, context['page'])
     page = context['page']
     return get_image_for_page(page, type)
