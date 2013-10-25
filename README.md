@@ -7,10 +7,10 @@ Define (background-/banner-)images per page
 
 At least our designer likes to create websites where pages can have individual
 backgrounds. Or individual banners. So for example the index-page has a generic
-background, while all pages under ''Contact'' should have another background.
+background, while all pages under _Contact_ should have another background.
 
 Mezzanine has this great feature that templates are searched by
-''page-name.html'', ''<content_type>.html'' and then ''page.html''. so one
+`page-name.html`, `<content_type>.html` and then `page.html`. so one
 would just create specific templates for the pages that get different
 background. Its a nice solution that even works. But it has drawbacks:
  - To change the background, the designer has to ask the programmer because it
