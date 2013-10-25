@@ -5,9 +5,7 @@ Define (background-/banner-)images per page
 
 # The Problem
 
-At least our designer likes to create websites where pages can have individual
-backgrounds. Or individual banners. So for example the index-page has a generic
-background, while all pages under _Contact_ should have another background.
+At least our designer likes to create websites where pages can have individual backgrounds. Or individual banners. So for example the index-page has a generic background, while all pages under _Contact_ should have another background.
 
 Mezzanine has this great feature that templates are searched by
 `page-name.html`, `<content_type>.html` and then `page.html`. so one
@@ -38,17 +36,13 @@ Here is how mezzanine-pageimages solves this:
 
 # Install
 
-This package will be on pypi.python.org soon. Then its just a matter of `pip
-install mezzanine-pageimage`.
+This package is on pypi.python.org. To simply install it just do `pip install mezzanine-pageimage`. Or define it as a requirement in your _requirements.txt_ or _setup.py_.
 
-Until then (and for development) either do a git-checkout and install via `pip
-install -e`. Or you go by `pip install
-git+https://github.com/bcs-de/mezzanine-pageimages.git#egg=mezzanine-pageimages`.
+For hacking on mezzanine-pageimages do a git-checkout and install via `pip install -e`. Or install by `pip install -e git+https://github.com/bcs-de/mezzanine-pageimages.git#egg=mezzanine-pageimages`.
 
 # Usage
 
-Add the app to your `INSTALLED_APPS`. You can define your own image-roles in
-the `SETTINGS` in settings.py:
+Add the app to your `INSTALLED_APPS`. You can define your own image-roles in the `SETTINGS` in settings.py:
 
 ```python
 PAGEIMAGE_TYPES = (
@@ -59,7 +53,7 @@ PAGEIMAGE_TYPES = (
 Then use it in your templates:
 
 ```
-{% load pageimage_tages %}
+{% load pageimage_tags %}
 
 Lets get the url for the background image: {% pageimage 'BACKGROUND' %}
 ```
