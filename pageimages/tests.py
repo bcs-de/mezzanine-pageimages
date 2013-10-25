@@ -75,3 +75,11 @@ class TestGetImageForPage(TestCase):
             '/static/media/child2.jpg',
             get_image_for_page(p2, 'BACKGROUND')
         )
+
+    def test_get_banner_image(self):
+        DefaultImage.objects.create(type='BANNER', file='defaultbanner.jpg')
+
+        self.assertEqual(
+            '/static/media/defaultbanner.jpg',
+            get_image_for_page(self.p, 'BANNER')
+        )
