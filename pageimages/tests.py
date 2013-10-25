@@ -17,6 +17,8 @@
 
 from django.test import TestCase
 from mezzanine.pages.models import Page
+from mezzanine.conf import settings as mez_settings
+from django.conf import settings as django_settings
 
 from .models import DefaultImage, PageImage
 from .templatetags.pageimage_tags import get_image_for_page
@@ -83,3 +85,14 @@ class TestGetImageForPage(TestCase):
             '/static/media/defaultbanner.jpg',
             get_image_for_page(self.p, 'BANNER')
         )
+
+class TestSettings(TestCase):
+    def test_mezannine_settings_exists(self):
+        self.assertTrue(hasattr(mez_settings, 'PAGEIMAGE_TYPES'))
+        #self.assertEqual(
+            #mez_settings.PAGEIMAGE_TYPES[0][0],
+            #'BACKGROUND'
+        #)
+
+    def test_django_settings_exists(self):
+        self.assertTrue(hasattr(django_settings, 'PAGEIMAGE_TYPES'))
