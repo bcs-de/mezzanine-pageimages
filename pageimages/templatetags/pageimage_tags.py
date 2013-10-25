@@ -20,19 +20,24 @@ from ..models import DefaultImage
 
 register = template.Library()
 
-def get_image_for_page(page, type):
-    imgs = page.pageimage_set.filter(type=type)
-    if len(imgs):
-        return imgs[0].file.url
-    if page.parent:
-        return get_image_for_page(page.parent, type)
+def get_default_image(type):
     defaultimgs = DefaultImage.objects.filter(type=type)
     if len(defaultimgs):
         return defaultimgs[0].file.url
     print "FALLBACK will return ''"
     return u''
 
+def get_image_for_page(page, type):
+    imgs = page.pageimage_set.filter(type=type)
+    if len(imgs):
+        return imgs[0].file.url
+    if page.parent:
+        return get_image_for_page(page.parent, type)
+    return get_default_image(type)
+
 @register.simple_tag(takes_context=True)
 def pageimage(context, type):
-    page = context['page']
-    return get_image_for_page(page, type)
+    if 'page' in context:
+        page = context['page']
+        return get_image_for_page(page, type)
+    return get_default_image(type)
