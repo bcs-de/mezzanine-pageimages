@@ -19,7 +19,7 @@ from distutils.core import setup
 
 setup(
     name="mezzanine-pageimages",
-    version="0.1.0",
+    version="0.2.0",
     description="",
     author="Arnold Krille for bcs kommunikationsloesungen",
     author_email="a.krille@b-c-s.de",
