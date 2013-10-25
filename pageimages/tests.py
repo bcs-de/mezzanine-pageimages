@@ -19,6 +19,7 @@ from django.test import TestCase
 from mezzanine.pages.models import Page
 from mezzanine.conf import settings as mez_settings
 from django.conf import settings as django_settings
+from django.template import Template, Context
 
 from .models import DefaultImage, PageImage
 from .templatetags.pageimage_tags import get_image_for_page
@@ -85,6 +86,36 @@ class TestGetImageForPage(TestCase):
             '/static/media/defaultbanner.jpg',
             get_image_for_page(self.p, 'BANNER')
         )
+
+
+class TestPageImageTags(TestCase):
+    def setUp(self):
+        self.p = Page(title='test')
+        self.p.save()
+
+    def setUpTemplate(self):
+        self.tmpl = Template(u'{% load pageimage_tags %}This will point to image \'{% pageimage \'BACKGROUND\' %}\'.')
+        self.c = Context({'page': self.p})
+
+    def test_simpletemplate_empty(self):
+        self.setUpTemplate()
+        tmplout = self.tmpl.render(self.c)
+        self.assertTrue('\'\'' in tmplout)
+
+    def test_simpletemplate_default(self):
+        self.setUpTemplate()
+        DefaultImage.objects.create(type='BACKGROUND', file='defaultback.jpg')
+        self.assertTrue(
+            '\'/static/media/defaultback.jpg\'' in self.tmpl.render(self.c)
+        )
+
+    def test_simpletemplate_specific(self):
+        self.setUpTemplate()
+        PageImage.objects.create(page=self.p, type='BACKGROUND', file='back.jpg')
+        self.assertTrue(
+            '\'/static/media/back.jpg\'' in self.tmpl.render(self.c)
+        )
+
 
 class TestSettings(TestCase):
     def test_mezannine_settings_exists(self):
