@@ -19,7 +19,7 @@ from setuptools import setup
 
 setup(
     name="mezzanine-pageimages",
-    version="0.2.2",
+    version="0.2.3",
     description="Define (background-/banner-)images per page in mezzanine.",
     long_description=open('README.md', 'r').read(),
     author="Arnold Krille for bcs kommunikationsloesungen",
@@ -39,5 +39,5 @@ setup(
     'limitations under the License.',
 
     packages=['pageimages', 'pageimages.templatetags', 'pageimages.migrations'],
-    install_requires=['mezzanine>=1.4.0'],
+    install_requires=['mezzanine>=3.0.0'],
 )
