@@ -1,6 +1,7 @@
 #
-#   Copyright 2013 by Arnold Krille for bcs kommunikationsloesungen
-#                     <a.krille@b-c-s.de>
+#   Copyright 2013, 2014
+#             by Arnold Krille for bcs kommunikationsloesungen
+#             <a.krille@b-c-s.de>
 #
 #   Licensed under the Apache License, Version 2.0 (the "License");
 #   you may not use this file except in compliance with the License.
@@ -17,8 +18,10 @@
 
 from django import template
 from ..models import DefaultImage
+from mezzanine.pages.models import Page
 
 register = template.Library()
+
 
 def get_default_image(type):
     defaultimgs = DefaultImage.objects.filter(type=type)
@@ -26,6 +29,7 @@ def get_default_image(type):
         return defaultimgs[0].file.url
     print "FALLBACK will return ''"
     return u''
+
 
 def get_image_for_page(page, type):
     imgs = page.pageimage_set.filter(type=type)
@@ -35,9 +39,15 @@ def get_image_for_page(page, type):
         return get_image_for_page(page.parent, type)
     return get_default_image(type)
 
+
 @register.simple_tag(takes_context=True)
-def pageimage(context, type):
-    if 'page' in context:
+def pageimage(context, type, page=None):
+    if isinstance(page, str):
+        page = Page.objects.get(titles=page)
+
+    if not page and 'page' in context:
         page = context['page']
+
+    if page:
         return get_image_for_page(page, type)
     return get_default_image(type)

@@ -1,6 +1,7 @@
 #
-#   Copyright 2013 by Arnold Krille for bcs kommunikationsloesungen
-#                     <a.krille@b-c-s.de>
+#   Copyright 2013, 2014
+#             by Arnold Krille for bcs kommunikationsloesungen
+#             <a.krille@b-c-s.de>
 #
 #   Licensed under the Apache License, Version 2.0 (the "License");
 #   you may not use this file except in compliance with the License.
@@ -19,7 +20,7 @@ from setuptools import setup
 
 setup(
     name="mezzanine-pageimages",
-    version="0.2.3",
+    version="0.3.0",
     description="Define (background-/banner-)images per page in mezzanine.",
     long_description=open('README.md', 'r').read(),
     author="Arnold Krille for bcs kommunikationsloesungen",
